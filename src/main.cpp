@@ -2,13 +2,13 @@
 #include "bluetoof.h"
 #include "zap_led.h"
 #include "Arduino.h"
-
+#include "translation.h"
 
 int main() {
-
     // put your setup code here, to run once:
     //Serial.begin(38400);
     UartBluetooth ublue;
+    TranslationLayer handler;
 
     //led_init();
     //int data;
@@ -21,6 +21,7 @@ int main() {
         //  Serial.write('\n');
         //}
         ublue.uart_go();
+
         //Serial.println("yo wtf");
         //led_go();
     }
