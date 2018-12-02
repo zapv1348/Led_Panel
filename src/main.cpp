@@ -8,7 +8,8 @@ int main() {
     // put your setup code here, to run once:
     //Serial.begin(38400);
     UartBluetooth ublue;
-    TranslationLayer handler;
+    WrapLed ledWrapped;
+    TranslationLayer * handler = new TranslationLayer(&ledWrapped);
 
     //led_init();
     //int data;
@@ -20,7 +21,7 @@ int main() {
         //  Serial.write(data);
         //  Serial.write('\n');
         //}
-        ublue.uart_go();
+        ublue.UartGo();
 
         //Serial.println("yo wtf");
         //led_go();

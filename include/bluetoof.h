@@ -1,4 +1,3 @@
-
 #ifndef BLUETOOF_H
 #define BLUETOOF_H
 
@@ -11,8 +10,8 @@ private:
   Stream * blue_port;
 public:
   UartBluetooth();
-  void uart_go();
-  void waitForResponse();
+  void UartGo();
+  void WaitForResponse();
 };
 
-#endif
+#endif //BLUETOOF_H

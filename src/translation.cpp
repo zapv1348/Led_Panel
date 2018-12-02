@@ -15,35 +15,58 @@
 #include <stdlib.h>
 #include "translation.h"
 
-int OnFunctionHandle(std::string){
+
+int TranslationLayer::OnFunctionHandle(std::string st){
+  this->led2Transfer->AllOn();
   return 0;
 }
 
-int OffFunctionHandle(std::string){
+int TranslationLayer::OffFunctionHandle(std::string st){
+  this->led2Transfer->AllOff();
   return 0;
 }
 
-int SCTFunctionHandle(std::string){
+int TranslationLayer::SCTFunctionHandle(std::string st){
   return 0;
 }
 
-int SCSFunctionHandle(std::string){
+int TranslationLayer::SCSFunctionHandle(std::string st){
   return 0;
 }
 
-int SCAFunctionHandle(std::string){
+int TranslationLayer::SCAFunctionHandle(std::string st){
   return 0;
 }
 
-TranslationLayer::TranslationLayer(){
-  m["on"] = OnFunctionHandle;
-  m["off"] = OffFunctionHandle;
-  m["sct"] = SCTFunctionHandle;
-  m["scs"] = SCSFunctionHandle;
-  m["sca"] = SCAFunctionHandle;
+int TranslationLayer::BRTFunctionHandle(std::string st){
+  return 0;
+}
+
+TranslationLayer::TranslationLayer(WrapLed * led2TransFor){
+  m["on"] = &TranslationLayer::OnFunctionHandle;
+  m["off"] = &TranslationLayer::OffFunctionHandle;
+  m["sct"] = &TranslationLayer::SCTFunctionHandle;
+  m["scs"] = &TranslationLayer::SCSFunctionHandle;
+  m["sca"] = &TranslationLayer::SCAFunctionHandle;
+  m["brt"] = &TranslationLayer::BRTFunctionHandle;
+  led2Transfer = led2TransFor;
   return;
 }
 
-int TranslationLayer::cmd_handler(std::string st){
-  return 0;
+int TranslationLayer::CmdHandler(std::string st){
+  int ret = st.compare(0,4,"led:");
+
+  if (ret == 0){
+    std::string tmp = st.substr(st.find(":"), st.length());
+    std::string tmp2 = tmp.substr(st.find(":"), tmp.length());
+    for (auto const& x : this->m){
+      if (0 == tmp2.compare(0, tmp2.length(), x.first)) {
+        std::string tmp3 = tmp2.substr(st.find(":"), st.length());
+        ret = (*this.*m[x.first])(tmp3);
+        break;
+      }
+    }
+    ret = 1;
+  }
+  return ret;
 }

@@ -36,13 +36,13 @@ UartBluetooth::UartBluetooth(){
   //Serial1.end();
   Serial1.begin(115200);
   this->blue_port = &Serial1;
-  this->waitForResponse();
+  this->WaitForResponse();
 
   this->internal_port->println("Done!");
   return;
 }
 
-void UartBluetooth::uart_go(){
+void UartBluetooth::UartGo(){
   int sup;
   while (this->blue_port->available()) {
     sup = this->blue_port->read();
@@ -57,7 +57,7 @@ void UartBluetooth::uart_go(){
 }
 
 
-void UartBluetooth::waitForResponse() {
+void UartBluetooth::WaitForResponse() {
   int sup;
   while (this->blue_port->available()) {
     sup = this->blue_port->read();

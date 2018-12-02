@@ -1,1 +1,24 @@
-//sup
+#ifndef ZAP_LED_
+#define ZAP_LED_
+
+#include "FastLED.h"
+#include <string>
+#include <vector>
+
+#define NUMLEDS 60
+
+class WrapLed {
+  private:
+    CRGB zapled[NUMLEDS];
+    int brightness = 200;
+  public:
+    WrapLed();
+    void AllOn();
+    void AllOff();
+    void SetBrightness(int brightness);
+    void OneColor(int color);
+    void ArrColor(std::vector<int> &colors);
+    void IceTheme();
+};
+
+#endif //ZAP_LED_
