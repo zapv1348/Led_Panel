@@ -8,13 +8,7 @@
 class TranslationLayer{
   private:
     typedef int (TranslationLayer::*pfunc)(std::string);
-    std::map<std::string, pfunc> m = {
-      {"on", NULL},
-      {"off", NULL},
-      {"sct", NULL},
-      {"scs", NULL},
-      {"sca", NULL}
-    };
+    std::map<std::string, pfunc> m = {};
     WrapLed * led2Transfer;
   public:
     TranslationLayer(WrapLed * led2TransFor);

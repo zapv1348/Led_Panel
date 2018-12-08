@@ -21,11 +21,11 @@ void WrapLed::SetBrightness(int brightness){
   FastLED.setBrightness(this->brightness);
 }
 
-void WrapLed::OneColor(int color){
+void WrapLed::OneColor(std::vector<int> color){
   return;
 }
 
-void WrapLed::ArrColor(std::vector<int> &colors){
+void WrapLed::ArrColor(std::vector<std::vector<int>> &colors){
   return;
 }
 

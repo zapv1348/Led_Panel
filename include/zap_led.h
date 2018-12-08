@@ -16,8 +16,8 @@ class WrapLed {
     void AllOn();
     void AllOff();
     void SetBrightness(int brightness);
-    void OneColor(int color);
-    void ArrColor(std::vector<int> &colors);
+    void OneColor(std::vector<int> color);
+    void ArrColor(std::vector<std::vector<int>> &colors);
     void IceTheme();
 };
 
