@@ -13,12 +13,9 @@ class TranslationLayer{
   public:
     TranslationLayer(WrapLed * led2TransFor);
     int CmdHandler(std::string st);
-    int OnFunctionHandle(std::string st);
-    int OffFunctionHandle(std::string st);
     int SCTFunctionHandle(std::string st);
     int SCSFunctionHandle(std::string st);
     int SCAFunctionHandle(std::string st);
-    int BRTFunctionHandle(std::string st);
 };
 
 #endif //TRANSLATION_

@@ -15,30 +15,7 @@
 #include <stdlib.h>
 #include "translation.h"
 
-enum STR2INT_ERROR { SUCCESS, OVERFLO, UNDERFLO, INCONVERTIBLE };
 
-static STR2INT_ERROR stoi(std::string &st, int &ret, int base = 10){
-  int tmp = 0;
-  for (auto& i : st){
-    if (i >= '0' && i <= '9'){
-      tmp = tmp * base + (i - '0');
-    } else {
-      return INCONVERTIBLE;
-    }
-  }
-  ret = tmp;
-  return SUCCESS;
-}
-
-int TranslationLayer::OnFunctionHandle(std::string st){
-  this->led2Transfer->AllOn();
-  return 0;
-}
-
-int TranslationLayer::OffFunctionHandle(std::string st){
-  this->led2Transfer->AllOff();
-  return 0;
-}
 
 int TranslationLayer::SCTFunctionHandle(std::string st){
   return 0;
@@ -52,25 +29,10 @@ int TranslationLayer::SCAFunctionHandle(std::string st){
   return 0;
 }
 
-int TranslationLayer::BRTFunctionHandle(std::string st){
-  int ret = 0;
-  STR2INT_ERROR err = stoi(st, ret, 10);
-  if (err != SUCCESS){
-    return -1;
-  }
-  if (ret < 256 && ret > 0){;
-    this->led2Transfer->SetBrightness(ret);
-    return 0;
-  }
-}
-
 TranslationLayer::TranslationLayer(WrapLed * led2TransFor){
-  m["on"] = &TranslationLayer::OnFunctionHandle;
-  m["off"] = &TranslationLayer::OffFunctionHandle;
   m["sct"] = &TranslationLayer::SCTFunctionHandle;
   m["scs"] = &TranslationLayer::SCSFunctionHandle;
   m["sca"] = &TranslationLayer::SCAFunctionHandle;
-  m["brt"] = &TranslationLayer::BRTFunctionHandle;
   led2Transfer = led2TransFor;
   return;
 }
