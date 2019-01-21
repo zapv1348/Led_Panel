@@ -14,9 +14,10 @@
 
 #include <stdlib.h>
 #include "translation.h"
+#include "onoffbrightnesshandlers.h"
 
 
-
+#ifdef 0
 int TranslationLayer::SCTFunctionHandle(std::string st){
   return 0;
 }
@@ -37,6 +38,23 @@ TranslationLayer::TranslationLayer(WrapLed * led2TransFor){
   return;
 }
 
+#endif
+
+TranslationLayer::TranslationLayer(){
+  return;
+}
+
+CMD_REGISTER_E TranslationLayer::RegisterCommand(BaseCommandHandler * cmd, std::string cmd_call) {
+  if (cmd == NULL) return BAD_PNTR;
+  if (cmd_call.length() == 0) return NO_STRING;
+  if (m.find(cmd_call) == m.end()){
+    m[cmd_call] = cmd;
+    return SUCCESS_REGISTER;
+  } else {
+    return CMD_EXISTS;
+  }
+}
+
 int TranslationLayer::CmdHandler(std::string st){
   int ret = st.compare(0,4,"led:");
 
@@ -46,7 +64,7 @@ int TranslationLayer::CmdHandler(std::string st){
     for (auto const& x : this->m){
       if (0 == tmp2.compare(0, tmp2.length(), x.first)) {
         std::string tmp3 = tmp2.substr(st.find(":"), st.length());
-        ret = (*this.*m[x.first])(tmp3);
+        ret = x.second->executeCommand(tmp3);
         break;
       }
     }

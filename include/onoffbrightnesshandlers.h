@@ -7,21 +7,21 @@ private:
   WrapLed * led2control;
 public:
   OnHandler(WrapLed * Led2Control);
-  int OnHandler::executeCommand(std::string st);
+  int OnHandler::executeCommand(std::string st) override;
 };
 
 class OffHandler: public BaseCommandHandler{
 private:
   WrapLed * led2control;
 public:
-    OffHandler(WrapLed * Led2Control);
-    int OffHandler::executeCommand(std::string st);
+  OffHandler(WrapLed * Led2Control);
+  int OffHandler::executeCommand(std::string st) override;
 };
 
 class BrtHandler: public BaseCommandHandler{
 private:
   WrapLed * led2control;
 public:
-    BrtHandler(WrapLed * Led2Control);
-    int BrtHandler::executeCommand(std::string st);
+  BrtHandler(WrapLed * Led2Control);
+  int BrtHandler::executeCommand (std::string st) override;
 };
