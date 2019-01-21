@@ -1,5 +1,5 @@
 
-/** Goal of this file is to translate the incoming bluetooth control signals
+/** Goal of this file is to translate the incoming bluetoof control signals
  *  into a an output that can then be interpreted to execute a command
  */
 
@@ -16,8 +16,7 @@
 #include "translation.h"
 #include "onoffbrightnesshandlers.h"
 
-
-#ifdef 0
+#ifdef SET_OFF
 int TranslationLayer::SCTFunctionHandle(std::string st){
   return 0;
 }

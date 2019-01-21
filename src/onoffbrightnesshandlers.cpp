@@ -21,12 +21,21 @@ OnHandler::OnHandler(WrapLed * Led2Control){
   this->led2control = Led2Control;
 }
 
+OnHandler::~OnHandler(){
+
+}
+
 int OnHandler::executeCommand(std::string st){
   this->led2control->AllOn();
+  return 0;
 }
 
 OffHandler::OffHandler(WrapLed * Led2Control){
   this->led2control = Led2Control;
+}
+
+OffHandler::~OffHandler(){
+
 }
 
 int OffHandler::executeCommand(std::string st){
@@ -36,6 +45,10 @@ int OffHandler::executeCommand(std::string st){
 
 BrtHandler::BrtHandler(WrapLed * Led2Control){
     this->led2control = Led2Control;
+}
+
+BrtHandler::~BrtHandler(){
+
 }
 
 int BrtHandler::executeCommand(std::string st){
