@@ -17,7 +17,7 @@ static STR2INT_ERROR stoi(std::string &st, int &ret, int base = 10){
 }
 
 
-OnHandler::OnHandler(WrapLed * Led2Control){
+OnHandler::OnHandler(std::shared_ptr<WrapLed> Led2Control){
   this->led2control = Led2Control;
 }
 
@@ -30,7 +30,7 @@ int OnHandler::executeCommand(std::string st){
   return 0;
 }
 
-OffHandler::OffHandler(WrapLed * Led2Control){
+OffHandler::OffHandler(std::shared_ptr<WrapLed> Led2Control){
   this->led2control = Led2Control;
 }
 
@@ -43,7 +43,7 @@ int OffHandler::executeCommand(std::string st){
   return 0;
 }
 
-BrtHandler::BrtHandler(WrapLed * Led2Control){
+BrtHandler::BrtHandler(std::shared_ptr<WrapLed> Led2Control){
     this->led2control = Led2Control;
 }
 

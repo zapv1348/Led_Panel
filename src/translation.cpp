@@ -16,32 +16,7 @@
 #include "translation.h"
 #include "onoffbrightnesshandlers.h"
 
-#ifdef SET_OFF
-int TranslationLayer::SCTFunctionHandle(std::string st){
-  return 0;
-}
-
-int TranslationLayer::SCSFunctionHandle(std::string st){
-  return 0;
-}
-
-int TranslationLayer::SCAFunctionHandle(std::string st){
-  return 0;
-}
-
-TranslationLayer::TranslationLayer(WrapLed * led2TransFor){
-  m["sct"] = &TranslationLayer::SCTFunctionHandle;
-  m["scs"] = &TranslationLayer::SCSFunctionHandle;
-  m["sca"] = &TranslationLayer::SCAFunctionHandle;
-  led2Transfer = led2TransFor;
-  return;
-}
-
-#endif
-
-TranslationLayer::TranslationLayer(){
-  return;
-}
+TranslationLayer::TranslationLayer(){}
 
 CMD_REGISTER_E TranslationLayer::RegisterCommand(BaseCommandHandler * cmd, std::string cmd_call) {
   if (cmd == NULL) return BAD_PNTR;

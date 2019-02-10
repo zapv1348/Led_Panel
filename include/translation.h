@@ -27,7 +27,6 @@ class TranslationLayer{
     // deprecated
     // typedef int (TranslationLayer::*pfunc)(std::string);
     std::map<std::string, BaseCommandHandler *> m = {};
-    WrapLed * led2Transfer;
   public:
     TranslationLayer();
     CMD_REGISTER_E RegisterCommand(BaseCommandHandler * cmd, std::string cmd_call);
