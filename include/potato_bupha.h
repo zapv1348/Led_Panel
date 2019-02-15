@@ -13,7 +13,7 @@ template <class T> class PotatoBupha{
     size_t currentSize;
     size_t pushTo;
     size_t popFrom;
-    std::unique_ptr<T> baseAddr;
+    std::unique_ptr<T[]> baseAddr;
   public:
     PotatoBupha(size_t size);
     size_t curSize();
@@ -29,7 +29,7 @@ PotatoBupha<T>::PotatoBupha(size_t size){
   full = false;
   empty = true;
   
-  baseAddr = std::make_unique<T>(size);
+  baseAddr = std::make_unique<T[]>(size);
   maximumSize = size;
   currentSize = 0;
   pushTo = 0;
@@ -67,7 +67,7 @@ bool PotatoBupha<T>::pushToBuf(T * pushee, size_t numElements){
 
   currentSize += numElements;
   while (numElements > 0) {
-    *(baseAddr + pushTo) = *pushee;
+    baseAddr[pushTo] = *pushee;
     (pushTo + 1 >= maximumSize) ? pushTo=0 : pushTo++;
     pushee++;
     numElements--;
@@ -85,7 +85,7 @@ bool PotatoBupha<T>::popFromBuf(T * popBuf, size_t numElements){
   full = false;
   currentSize -= numElements;
   while (numElements){
-    *popBuf = *(baseAddr + popFrom);
+    *popBuf = baseAddr[popFrom];
     (popFrom + 1 >= maximumSize) ? popFrom = 0 : popFrom++;
     popBuf++;
     numElements--;
