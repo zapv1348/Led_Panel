@@ -1,5 +1,6 @@
 //#include <mbed.h>
 #include <memory>
+#include <string>
 #include "bluetoof.h"
 #include "zap_led.h"
 #include "Arduino.h"
@@ -22,20 +23,16 @@ int main() {
   auto handler = TranslationLayer{};
   auto bupha = PotatoBupha<char>(128);
   auto ublue = UartBluetooth{&bupha};
-  // TranslationLayer * handler = new TranslationLayer();
 
   initRegisterCmds(handler, ledWrapped);
 
   while(1) {
-    //if (Serial.available() ){
-      //data = Serial.read();
-      //Serial.println("echo: ");
-    //  Serial.write(data);
-    //  Serial.write('\n');
-    //}
     ublue.UartGo();
-
-    //Serial.println("yo wtf");
-    //led_go();
+    // got data
+    if (!bupha.isEmpty()){
+      char str[128];
+      bupha.popFromBuf(str, bupha.curSize());
+      handler.CmdHandler(str);
+    }
   }
 }

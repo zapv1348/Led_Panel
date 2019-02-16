@@ -46,12 +46,13 @@ void UartBluetooth::UartGo(){
   int sup;
   while (blue_port->available()) {
     sup = blue_port->read();
-    internal_port->print(sup);
+    // internal_port->print(sup);
+    buf->pushToBuf((char *) &sup, 1);
   }
-  while (internal_port->available()){
-    sup = internal_port->read();
-    blue_port->println(sup);
-  }
+  // while (internal_port->available()){
+  //  sup = internal_port->read();
+  //  blue_port->println(sup);
+  // }
   //internal_port->println("test");
   return;
 }
