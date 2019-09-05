@@ -3,11 +3,10 @@
 
 UartBluetooth::UartBluetooth(PotatoBupha<char> * buph){
   buf = buph;
-  Serial.begin(9600);
   //while(!Serial);
   //delay(10000);
-  Serial.write("this is a test\n");
-  internal_port = &Serial;
+  //Serial.write("this is a test\n");
+  //internal_port = &Serial;
 
   //Serial1.begin(57600);
   //blue_port=&Serial1;
@@ -38,22 +37,24 @@ UartBluetooth::UartBluetooth(PotatoBupha<char> * buph){
   blue_port = &Serial1;
   WaitForResponse();
 
-  internal_port->println("Done!");
+  //internal_port->println("Done!");
   return;
 }
 
 void UartBluetooth::UartGo(){
-  int sup;
+  char sup = '\0';
+  //internal_port->print("hello\n");
   while (blue_port->available()) {
     sup = blue_port->read();
-    // internal_port->print(sup);
+    //internal_port->print(sup);
+    blue_port->print(sup);
     buf->pushToBuf((char *) &sup, 1);
   }
-  // while (internal_port->available()){
-  //  sup = internal_port->read();
-  //  blue_port->println(sup);
-  // }
-  //internal_port->println("test");
+  if (sup != '\0') {
+    //internal_port->println();
+    blue_port->print("\n");
+  }
+
   return;
 }
 
@@ -62,8 +63,8 @@ void UartBluetooth::WaitForResponse() {
   int sup;
   while (blue_port->available()) {
     sup = blue_port->read();
-    internal_port->print(sup);
+    //internal_port->print(sup);
     blue_port->print(sup);
   }
-  internal_port->print("\n");
+  //internal_port->print("\n");
 }

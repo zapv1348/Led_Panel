@@ -32,17 +32,22 @@ CMD_REGISTER_E TranslationLayer::RegisterCommand(BaseCommandHandler * cmd, std::
 int TranslationLayer::CmdHandler(std::string st){
   int ret = st.compare(0,4,"led:");
 
+
   if (ret == 0){
-    std::string tmp = st.substr(st.find(":"), st.length());
-    std::string tmp2 = tmp.substr(st.find(":"), tmp.length());
+    // gets everything after led:
+    std::string tmp = st.substr(st.find(":") + 1);
+    for (auto x : tmp) {
+      Serial.print(x);
+    }
+
     for (auto const& x : this->m){
-      if (0 == tmp2.compare(0, tmp2.length(), x.first)) {
-        std::string tmp3 = tmp2.substr(st.find(":"), st.length());
+      if (0 == tmp.compare(0, tmp.find(":"), x.first)) {
+        std::string tmp3 = tmp.substr(st.find(":") + 1);
         ret = x.second->executeCommand(tmp3);
+        ret = 1;
         break;
       }
     }
-    ret = 1;
   }
   return ret;
 }

@@ -18,21 +18,30 @@ void initRegisterCmds(TranslationLayer &handler, std::shared_ptr<WrapLed> ledWra
 }
 
 int main() {
-  //Serial.begin(38400);
   auto ledWrapped = std::make_shared<WrapLed>();
+  //auto ledWrapped = WrapLed();
   auto handler = TranslationLayer{};
   auto bupha = PotatoBupha<char>(128);
   auto ublue = UartBluetooth{&bupha};
 
+
   initRegisterCmds(handler, ledWrapped);
+
+  Serial.begin(115200);
+  Serial.println("whytf");
+  pinMode(13, OUTPUT);
 
   while(1) {
     ublue.UartGo();
+    digitalWrite(13, HIGH);
+    uint32_t tmp = bupha.curSize();
     // got data
-    if (!bupha.isEmpty()){
+    if (tmp > 0) {
       char str[128];
-      bupha.popFromBuf(str, bupha.curSize());
-      handler.CmdHandler(str);
+      bupha.popFromBuf(&str[0], tmp);
+      if (!handler.CmdHandler(str) && tmp < 20){
+        bupha.pushToBuf(&str[0], tmp);
+      }
     }
   }
 }
