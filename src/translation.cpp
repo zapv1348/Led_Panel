@@ -39,9 +39,14 @@ int TranslationLayer::CmdHandler(std::string st){
     for (auto x : tmp) {
       Serial.print(x);
     }
+    Serial.println("");
 
     for (auto const& x : this->m){
-      if (0 == tmp.compare(0, tmp.find(":"), x.first)) {
+      int len1 = tmp.find(":");
+      Serial.println(len1);
+
+      if (0 == tmp.compare(0, len1, x.first)) {
+        digitalWrite(13, LOW);
         std::string tmp3 = tmp.substr(st.find(":") + 1);
         ret = x.second->executeCommand(tmp3);
         ret = 1;

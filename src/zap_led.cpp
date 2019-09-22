@@ -6,7 +6,10 @@
 //implement stuff
 WrapLed::WrapLed(){
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(zapled, NUMLEDS);
-  FastLED.setBrightness(30);
+  for (int i = 0; i < NUMLEDS; ++i) {
+    this->zapled[i] = 0;
+  }
+  FastLED.setBrightness(40);
   FastLED.show();
 }
 

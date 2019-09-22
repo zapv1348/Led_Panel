@@ -18,6 +18,7 @@ template <class T> class PotatoBupha{
     PotatoBupha(size_t size);
     size_t curSize();
     size_t maxSize();
+    void clear();
     bool isFull();
     bool isEmpty();
     bool pushToBuf(T * pushee, size_t numElements=1);
@@ -54,6 +55,13 @@ bool PotatoBupha<T>::isFull(){
 template <class T>
 bool PotatoBupha<T>::isEmpty(){
   return empty;
+}
+
+template <class T>
+void PotatoBupha<T>::clear(){
+  currentSize = 0;
+  pushTo = 0;
+  popFrom = 0;
 }
 
 template <class T>

@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-#define NUMLEDS 60
+#define NUMLEDS 5
 
 class WrapLed {
   private:

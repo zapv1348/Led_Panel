@@ -20,28 +20,37 @@ void initRegisterCmds(TranslationLayer &handler, std::shared_ptr<WrapLed> ledWra
 int main() {
   auto ledWrapped = std::make_shared<WrapLed>();
   //auto ledWrapped = WrapLed();
-  auto handler = TranslationLayer{};
-  auto bupha = PotatoBupha<char>(128);
-  auto ublue = UartBluetooth{&bupha};
+  //auto handler = TranslationLayer{};
+  //auto bupha = PotatoBupha<char>(128);
+  //auto ublue = UartBluetooth{&bupha};
+
+  ledWrapped->AllOff();
 
 
-  initRegisterCmds(handler, ledWrapped);
+  //initRegisterCmds(handler, ledWrapped);
 
-  Serial.begin(115200);
-  Serial.println("whytf");
-  pinMode(13, OUTPUT);
+  //Serial.begin(115200);
+  //Serial.println("whytf");
+  //pinMode(13, OUTPUT);
 
+  //digitalWrite(13, HIGH);
+  //int cnt = 0;
   while(1) {
-    ublue.UartGo();
-    digitalWrite(13, HIGH);
-    uint32_t tmp = bupha.curSize();
-    // got data
-    if (tmp > 0) {
-      char str[128];
-      bupha.popFromBuf(&str[0], tmp);
-      if (!handler.CmdHandler(str) && tmp < 20){
-        bupha.pushToBuf(&str[0], tmp);
-      }
-    }
+    //ublue.UartGo();
+    //uint32_t tmp = bupha.curSize();
+    //// got data
+    //if (tmp > 0) {
+    //  char str[128];
+    //  bupha.popFromBuf(&str[0], tmp);
+    //  if (!handler.CmdHandler(str) && tmp < 20){
+    //    bupha.pushToBuf(&str[0], tmp);
+    //  }
+    //  if (tmp > 20) bupha.clear();
+    //  cnt++;
+    //}
+    //if (cnt > 1000) {
+    //  cnt = 0;
+    //  bupha.clear();
+    //}
   }
 }
